@@ -1,5 +1,6 @@
 Vagrant.configure("2") do |config|
 	
+	# https://help.ubuntu.com/community/BIND9ServerHowto
 	# See https://www.ip-insider.de/bind9-dns-server-auf-ubuntu-betreiben-a-1020898/
 	config.vm.define "dnsserver.vm" do |dnsserver|
 		dnsserver.vm.box = "ubuntu/bionic64"
