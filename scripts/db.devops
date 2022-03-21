@@ -1,0 +1,22 @@
+;
+; BIND data file for local loopback interface
+;
+$TTL    2D
+@       IN      SOA     dnsserver.devops. mail.devops. (
+                             5         ; Serial -> Always increment on bind reload
+                            8H         ; Refresh
+                            2H         ; Retry
+                            4W         ; Expire
+                            3H )       ; Negative Cache TTL
+
+@               IN      NS      dnsserver.devops.
+                IN      A       192.168.100.2
+
+dnsserver       IN      A       192.168.100.2
+localhost       IN      A       127.0.0.1
+
+
+; our other machines
+dummy           IN      A       192.168.100.123
+
+; Keep newline at the end

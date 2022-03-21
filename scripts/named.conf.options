@@ -1,0 +1,38 @@
+//acl goodclients { // Name kann frei gewählt werden
+//	 192.168.0.0/24;  // Lokales Netz (IP-Adressbereich anpassen)
+//	 //10.0.10.45       // einzelner Client im Netz
+//	 localhost;       // localhost sollte immer eingetragen sein
+//	 localnets;
+//};
+
+
+options {
+        directory "/var/cache/bind";
+
+        // If there is a firewall between you and nameservers you want
+        // to talk to, you may need to fix the firewall to allow multiple
+        // ports to talk.  See http://www.kb.cert.org/vuls/id/800113
+
+        // If your ISP provided one or more IP addresses for stable
+        // nameservers, you probably want to use them as forwarders.
+        // Uncomment the following block, and insert the addresses replacing
+        // the all-0's placeholder.
+
+        // forwarders {
+        //      0.0.0.0;
+        // };
+
+        //========================================================================
+        // If BIND logs error messages about the root key being expired,
+        // you will need to update your keys.  See https://www.isc.org/bind-keys
+        //========================================================================
+        dnssec-validation auto;
+
+        //allow-query { goodclients; };
+        auth-nxdomain no;    # conform to RFC1035
+        // no IP 6 for now
+        // listen-on-v6 { any; };
+        
+        // todo, configure listen ips
+        //listen-on { 127.0.0.1; 192.168.0.10; 10.0.20.25; };
+};
