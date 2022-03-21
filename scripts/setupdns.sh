@@ -1,6 +1,18 @@
 #!/bin/bash
 set -ex
 
+
+if [ -z "$1" ];
+then
+    echo "first argument must be an IP";
+    exit 1;
+fi
+
+echo "Setting IP $1"
+IP=$1
+
+
+
 hostname dnsserver
 
 apt update
@@ -24,7 +36,8 @@ ln -s /vagrant/scripts/db.devops /etc/bind/db.devops
 /etc/init.d/bind9 restart
 
 
-IP=$(ip address | grep -P "inet 192." | sed -e "s#.*\(192.*\)/.*#\1#")
+# This is used to detect the ip but passing it is more convenient here since multiple 192. ips may exist
+#IP=$(ip address | grep -P "inet 192." | sed -e "s#.*\(192.*\)/.*#\1#")
 echo "      nameservers:" >> /etc/netplan/50-vagrant.yaml
 echo "         addresses: [$IP]" >> /etc/netplan/50-vagrant.yaml
 
